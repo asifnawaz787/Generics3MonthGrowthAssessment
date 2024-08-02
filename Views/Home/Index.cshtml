@@ -1,0 +1,27 @@
+﻿@using Generics3MonthGrowthAssessment.Code;
+@{
+    ViewData["Title"] = "Home Page";
+
+    var cacheManager = new CacheManager<int, int>();
+    cacheManager.CacheLimit = 3;
+    cacheManager.Add<int,int>( 1,  2);
+    cacheManager.Add<int, int>(2, 3);
+    cacheManager.Add<int, int>(3, 4);
+    cacheManager.Add<int, int>(4, 7);
+    var value = cacheManager.Get<int>(4);
+    ViewData["Value"] = value;
+    cacheManager.Remove<int>(2);
+    var valueRemoved = cacheManager.Get<int>(2);
+    ViewData["Value"] = value;
+    ViewData["ValueRemoved"] = valueRemoved;
+    cacheManager.ClearCache();
+
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    @ViewData["Value"];
+    <br />
+    @ViewData["ValueRemoved"];
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
